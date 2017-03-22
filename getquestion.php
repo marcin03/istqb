@@ -1,13 +1,10 @@
 <?php
-    $mysql_host = 'localhost'; 
-    $mysql_user = 'root'; 
-    $mysql_pass = ''; 
-    $mysql_db = 'istqb'; 
-		
-	$conn = new mysqli($mysql_host, $mysql_user, $mysql_pass, $mysql_db);
-	if ($conn->connect_error) { 
-		die("Connection failed: " . $conn->connect_error);
-	} 
+	require_once "dbconnect.php";
+	
+	$connection= new Connection;
+	$conn=$connection->getConnect();
+	
+	
 	$id_question = rand(2,50);
 	$contentQuery = "SELECT content, picture, ans_a, ans_b, ans_c, ans_d from `questions` WHERE id_question = $id_question";
 	$result = $conn->query($contentQuery);
