@@ -1,28 +1,14 @@
 <?php
 	require_once "dbconnect.php";
+	require_once "Question.php";
 	
-	$connection= new Connection;
-	$conn=$connection->getConnect();
-	
+	$connection = new Connection;
+	$conn = $connection->getConnect();
 	
 	$id_question = rand(2,50);
-	$contentQuery = "SELECT content, picture, ans_a, ans_b, ans_c, ans_d from `questions` WHERE id_question = $id_question";
-	$result = $conn->query($contentQuery);
-
-	if ($result->num_rows > 0) {
-    // output data of each row
-  while($row = $result->fetch_assoc()) {
-        echo "Zadanie $id_question <br><br>" . $row["content"].   
-		"<br><br>A. " . $row["ans_a"]. "<br>B. " . $row["ans_b"]. "<br>C. " . $row["ans_c"]. "<br>D. " . $row["ans_d"]."<br>";
-    }
-} else {
-    echo "0 results";
-}
-	$good_ans = $conn->query("SELECT good_ans FROM `questions` WHERE id_question=$id_question");
-	$good_row = $good_ans->fetch_assoc();
-
-		$variable = $good_row["good_ans"];
-		
+	
+	$question1 = new Question($id_question, $conn);
+	$question1->displayQuestion();
 	$conn->close();
 ?>
 <html>
@@ -46,13 +32,12 @@ html *
 </head>
 <body bgcolor="#111111"> 
 	
-	<input type="radio" id = "a" name="answer" value="a" />A<br>
-	<input type="radio" id = "b" name="answer" value="b" />B<br>
-	<input type="radio" id = "c" name="answer" value="c" />C<br>
-	<input type="radio" id = "d" name="answer" value="d" />D<br>
+	<input type="radio" id = "a" name="answer" value="a" /><?php echo $question1->getAnsA();?><br />
+	<input type="radio" id = "b" name="answer" value="b" /><?php echo $question1->getAnsB();?><br />
+	<input type="radio" id = "c" name="answer" value="c" /><?php echo $question1->getAnsC();?><br />
+	<input type="radio" id = "d" name="answer" value="d" /><?php echo $question1->getAnsD();?><br />
 	<button id = "check" onclick="if_correct_answer()">Sprawdź</button>
 
-	
 	<form method="POST" action="getquestion.php">
 		<input id = "new_question" type="submit" value="Nowe pytanie">
 	</form>
@@ -61,7 +46,7 @@ html *
 	document.getElementById("check").style.color = "black";
 function if_correct_answer() {
 	var your_answer = document.querySelector('input[name="answer"]:checked').value;
-	var good_answer = <?php echo json_encode($variable); ?>;
+	var good_answer = '<?php echo $question1->getGoodAns(); ?>';
 	if (your_answer==good_answer){
 		document.getElementById("check").style.color = "green";
 	}
@@ -70,12 +55,6 @@ function if_correct_answer() {
 		alert("Poprawna odpowiedź to " + good_answer);
 	}
 }
-	
-
-	//if (document.getElementById('a').checked) {
-	//rate_value = document.getElementById('r1').value;
-	
 </script>
-	
 </body>
 </html>
