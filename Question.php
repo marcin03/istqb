@@ -9,7 +9,7 @@ class Question {
 	private $good_ans;
 	
 	function __construct($id_question, $conn) {
-		$contentQuery = "SELECT * from `questions` WHERE id_question = $id_question";
+		$contentQuery = "SELECT * from `questions` WHERE id_question = '$id_question'";
 		$result = $conn->query($contentQuery);
 		$row = $result->fetch_assoc();
 		$this->id_question = "$id_question";

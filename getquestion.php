@@ -4,12 +4,8 @@
 	
 	$connection = new Connection;
 	$conn = $connection->getConnect();
-	
 	$id_question = rand(2,50);
-	
-	$question1 = new Question($id_question, $conn);
-	$question1->displayQuestion();
-	$conn->close();
+
 ?>
 <html>
 <head>
@@ -31,7 +27,12 @@ html *
 </style>
 </head>
 <body bgcolor="#111111"> 
-	
+<?php
+	$question1 = new Question($id_question, $conn);
+	$question1->displayQuestion();
+	$conn->close();
+?>
+	<br />
 	<input type="radio" id = "a" name="answer" value="a" /><?php echo $question1->getAnsA();?><br />
 	<input type="radio" id = "b" name="answer" value="b" /><?php echo $question1->getAnsB();?><br />
 	<input type="radio" id = "c" name="answer" value="c" /><?php echo $question1->getAnsC();?><br />
