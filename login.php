@@ -1,6 +1,14 @@
 ﻿<?php
 	session_start();
 	require_once "dbconnect.php";
+	
+	if((!isset($_POST['login']))||(!isset($_POST['pass']))){
+		header('Location:index.php');
+		exit();
+	} else {
+		$insertedLogin = $_POST['login'];
+		$insertedPassword = $_POST['pass'];	
+	}
 
 	class User{
 		private $login;
@@ -13,29 +21,29 @@
 		function getLogin(){
 			return $this->login;
 		}
-		function isExists($conn){
-			$query = "SELECT * FROM users WHERE login='$this->login' AND password ='$this->password'";
-			if($result=$conn->query($query)){
-				$howMuchUsersInDB = $result->num_rows;
-				if($howMuchUsersInDB>0){
-					$result->free_result();
-					$conn->close();
-					return true;
-				}else{
-					return false;
-				}
+		function isExists($conn){ //return true if user login and password exists in database (return false if not)
+			
+			$stmt = $conn->prepare("SELECT * FROM users WHERE login = ? AND password = ?");
+			$stmt->bind_param('ss', $this->login, $this->password);
+			$stmt->execute();
+			
+			$result = $stmt->get_result();
+			$howMuchUsersInDB = $result->num_rows;
+			if($howMuchUsersInDB>0){
+				$result->free_result();
+				return true;
+			}else{
+				return false;
 			}
+			
 		}
 	}
 	$connection = new Connection;
 	$conn = $connection->getConnect();
 
-	if(isset($_POST['log'])){
-		$insertedLogin = $_POST['login'];
-		$insertedPassword = $_POST['pass'];
-	}
 	$user = new User($insertedLogin, $insertedPassword);
 	if($user->isExists($conn)){
+		$_SESSION['loggedIn'] = true; 
 		$_SESSION['user'] = $user->getLogin();
 		unset($_SESSION['wrongLogInfo']);
 		header('Location:account.php');
@@ -44,4 +52,5 @@
 		$conn->close();
 		header('Location:index.php');
 	}
+	$conn->close();
 ?>

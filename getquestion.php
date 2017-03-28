@@ -1,4 +1,10 @@
 <?php
+	session_start();
+	if (!isset($_SESSION['loggedIn'])){
+		header('Location:index.php');
+		exit();
+	}
+
 	require_once "dbconnect.php";
 	require_once "Question.php";
 	
