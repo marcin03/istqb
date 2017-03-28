@@ -17,23 +17,11 @@
 <head>
 <meta charset="UTF-8">
 <title> Getting questions </title>
-<style>
-
-html *
-{
-   font-size: 1em ;
-   color: #FFFFFF ;
-   font-family: Arial ;
-}
-.check{
-	font-size: 1em ;
-	color: #FF0000 ;
-	font-family: Arial ;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body bgcolor="#111111"> 
+<body> 
 <?php
+	echo "Zalogowany jako <a href='account.php'> ".$_SESSION["user"]."</a> | <a href='logout.php'>Wyloguj</a><br /><br />";
 	$question1 = new Question($id_question, $conn);
 	$question1->displayQuestion();
 	$conn->close();

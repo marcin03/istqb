@@ -1,0 +1,19 @@
+body {
+	background-color: #111111;
+}
+html *
+{
+   font-size: 1em ;
+   color: #FFFFFF ;
+   font-family: Arial ;
+}
+.button{
+	font-size: 1em ;
+	color: #000000 ;
+	font-family: Arial ;
+}
+.check{
+	font-size: 1em ;
+	color: #FF0000 ;
+	font-family: Arial ;
+}
