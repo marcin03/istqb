@@ -1,24 +1,24 @@
 <?php
 class Question {
-	private $id_question;
+	private $questionId;
 	private $content;
-	private $ans_a;
-	private $ans_b;
-	private $ans_c;
-	private $ans_d;
-	private $good_ans;
+	private $answerA;
+	private $answerB;
+	private $answerC;
+	private $answerD;
+	private $goodAnswer;
 	
-	function __construct($id_question, $conn) {
-		$contentQuery = "SELECT * from `questions` WHERE id_question = '$id_question'";
+	function __construct($questionId, $connection) {
+		$contentQuery = "SELECT * from `questions` WHERE id_question = '$questionId'";
 		$result = $conn->query($contentQuery);
 		$row = $result->fetch_assoc();
-		$this->id_question = "$id_question";
+		$this->questionId = "$questionId";
 		$this->content = $row["content"];
-		$this->ans_a = $row["ans_a"];
-		$this->ans_b = $row["ans_b"];
-		$this->ans_c = $row["ans_c"];
-		$this->ans_d = $row["ans_d"];
-		$this->good_ans = $row["good_ans"];
+		$this->answerA = $row["ans_a"];
+		$this->answerB = $row["ans_b"];
+		$this->answerC= $row["ans_c"];
+		$this->answerD = $row["ans_d"];
+		$this->goodAnswer = $row["good_ans"];
 	}
 	function displayQuestion(){
 		echo "To zadanie ma w bazie numer $this->id_question <br /><br /> $this->content <br />";
