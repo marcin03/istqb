@@ -5,12 +5,13 @@
 		exit();
 	}
 
-	require_once "dbconnect.php";
+	require_once "DbConnection.php";
 	require_once "Question.php";
+	require_once "QuestionRepository.php";
 	
-	$connection = new Connection;
+	$connection = new DbConnection;
 	$conn = $connection->getConnect();
-	$id_question = rand(2,50);
+	$questionId = rand(2,50);
 
 ?>
 <html>
@@ -22,7 +23,8 @@
 <body> 
 <?php
 	echo "Zalogowany jako <a href='account.php'> ".$_SESSION["user"]."</a> | <a href='logout.php'>Wyloguj</a><br /><br />";
-	$question1 = new Question($id_question, $conn);
+	$questionRepo = new QuestionRepository;
+	$question1 = $questionRepo->findOne($questionId);
 	$question1->displayQuestion();
 	$conn->close();
 ?>

@@ -9,18 +9,15 @@ class Question {
 	private $answerD;
 	private $goodAnswer;
 	
-	function __construct($questionId, $connection) {
-		$contentQuery = "SELECT * from `questions` WHERE id_question = '$questionId'";
-		$result = $connection->query($contentQuery);
-		$row = $result->fetch_assoc();
-		$this->questionId = "$questionId";
-		$this->content = $row["content"];
-		$this->picture = $row["picture"];
-		$this->answerA = $row["ans_a"];
-		$this->answerB = $row["ans_b"];
-		$this->answerC= $row["ans_c"];
-		$this->answerD = $row["ans_d"];
-		$this->goodAnswer = $row["good_ans"];
+	function __construct($questionId, $content, $picture, $answerA, $answerB, $answerC, $answerD, $goodAnswer) {
+		$this->questionId = $questionId;
+		$this->content = $content;
+		$this->picture = $picture;
+		$this->answerA = $answerA;
+		$this->answerB = $answerB;
+		$this->answerC= $answerC;
+		$this->answerD = $answerD;
+		$this->goodAnswer = $goodAnswer;
 	}
 	function displayQuestion(){ //displays picture (if exists) id question and content
 		echo "To zadanie ma w bazie numer $this->questionId <br />";
