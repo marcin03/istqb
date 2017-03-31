@@ -1,6 +1,6 @@
 ﻿<?php
 	session_start();
-	require_once "dbconnect.php";
+	require_once "DbConnection.php";
 	
 	if((!isset($_POST['login']))||(!isset($_POST['pass']))){
 		header('Location:index.php');
@@ -38,7 +38,7 @@
 			
 		}
 	}
-	$connection = new Connection;
+	$connection = new DbConnection;
 	$conn = $connection->getConnect();
 
 	$user = new User($insertedLogin, $insertedPassword);

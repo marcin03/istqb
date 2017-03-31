@@ -15,8 +15,7 @@
 	<?php
 		echo "<p> Witaj ".$_SESSION['user'];
 	?>
-		<a href="logout.php"> Wyloguj </a><br />
+		<a href="logout.php"> Wyloguj</a><br />
 		<a href="getquestion.php">Losuj jedno pytanie</a>
-		
 	</body>
 </html>
