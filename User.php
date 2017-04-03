@@ -1,19 +1,16 @@
 <?php
-class User{
+class User extends UsersRepository{
 	private $login;
 	private $password;
+	private $email;
 	
-	function __construct($login,$password){
+	function __construct($login, $password, $email=NULL){
 		$this->login = $login;
 		$this->password = $password;
+		$this->email = $email;
 	}
 	function getLogin(){
 		return $this->login;
-	}
-	function isExists(){ //return true if user login and password exists in database (return false if not)
-		$usersRepo = new UsersRepository;
-		$exists = $usersRepo->isExists($this->login, $this->password);
-		return $exists;
 	}
 }
 ?>

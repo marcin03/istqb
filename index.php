@@ -1,5 +1,8 @@
 ﻿<?php
 	session_start();
+		if(isset($_SESSION['wrongRegInfo'])){
+			session_unset();
+	}
 	if((isset($_SESSION['loggedIn']))&&($_SESSION['loggedIn']==true)){
 		header('Location:account.php');
 		exit();
