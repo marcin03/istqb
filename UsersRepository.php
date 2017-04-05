@@ -1,7 +1,7 @@
 <?php
 require_once "DbConnection.php";
 
-abstract class UsersRepository {
+class UsersRepository {
 	function loginIsBusy($login){
 		$dbConnection = new DbConnection;
 		$connection = $dbConnection->getConnect();

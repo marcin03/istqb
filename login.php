@@ -16,7 +16,8 @@
 	$connection = $dbConnection->getConnect();
 
 	$user = new User($insertedLogin, $insertedPassword);
-	if($user->isExists($insertedLogin, $insertedPassword)){
+	$userRepository = $user->getUserRepository();
+	if($userRepository->isExists($insertedLogin, $insertedPassword)){
 		$_SESSION['loggedIn'] = true; 
 		$_SESSION['user'] = $user->getLogin();
 		unset($_SESSION['wrongLogInfo']);
