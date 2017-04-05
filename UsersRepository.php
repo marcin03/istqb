@@ -35,5 +35,16 @@ class UsersRepository {
 			return false;
 		}	
 	}
+	
+	function addUser($user){
+		$login = $user->getLogin();
+		$password = $user->getPassword();
+		$email = $user->getEmail();
+		$dbConnection = new DbConnection;
+		$connection = $dbConnection->getConnect();
+		$stmt = $connection->prepare("INSERT INTO users (login, password, email) VALUES (?, ?, ?)");
+		$stmt->bind_param('sss', $login, $password, $email);
+		$stmt->execute();
+	}
 }
 ?>

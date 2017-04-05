@@ -15,6 +15,12 @@ class User{
 	function getLogin(){
 		return $this->login;
 	}
+	function getPassword(){
+		return $this->password;
+	}
+	function getEmail(){
+		return $this->email;
+	}	
 	function getUserRepository(){
 		return $this->userRepository;
 	}

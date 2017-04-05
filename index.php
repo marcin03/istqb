@@ -1,15 +1,20 @@
-﻿<?php
+﻿<!DOCTYPE HTML>
+<html lang="pl">
+<?php
 	session_start();
 		if(isset($_SESSION['wrongRegInfo'])){
-			session_unset();
+			unset($_SESSION['wrongRegInfo']);
 	}
 	if((isset($_SESSION['loggedIn']))&&($_SESSION['loggedIn']==true)){
 		header('Location:account.php');
 		exit();
 	}
+	if(isset($_SESSION['justRegisteredInfo'])){
+		echo $_SESSION['justRegisteredInfo'];
+		unset($_SESSION['justRegisteredInfo']);
+	}
 ?>
-<!DOCTYPE HTML>
-<html lang="pl">
+
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="style.css">

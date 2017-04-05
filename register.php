@@ -4,12 +4,16 @@
 	require_once "UsersRepository.php";
 	require_once "User.php";
 	
-	$newUser = new User($_POST['login'], $_POST['password']);
+	$newUserLogin = $_POST['login'];
+	$newUserPassword = $_POST['password'];
+	$newUserMail = $_POST['email'];
+	$newUser = new User($newUserLogin, $newUserPassword, $newUserMail);
+	$userRepository = $newUser->getUserRepository();
 	
 	if((!isset($_POST['login']))||(!isset($_POST['password']))||(!isset($_POST['email']))){
 		header('Location:registration.php');
 		exit();
-	} elseif($newUser->loginIsBusy($newUser->getLogin())){
+	} elseif($userRepository->loginIsBusy($newUser->getLogin())){
 		$_SESSION['wrongRegInfo']= '<span style="color:red"> Ten login jest już zajęty! </span>';
 		header('Location:registration.php');
 		exit();
@@ -22,8 +26,8 @@
 		header('Location:registration.php');
 		exit();
 	} else {
-		$newUserLogin = $_POST['login'];
-		$newUserPassword = $_POST['password'];
-		$newUserMail = $_POST['email'];
+		$userRepository->addUser($newUser);
+		$_SESSION['justRegisteredInfo']='<span style="color:blue"> Rejestracja przebiegła pomyślnie.</span><br /><br />';
+		header('Location:index.php');
 	}
 ?>
