@@ -1,4 +1,5 @@
 ﻿<?php
+	session_set_cookie_params(60,"/");
 	session_start();
 	require_once "DbConnection.php";
 	require_once "UsersRepository.php";

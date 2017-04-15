@@ -20,11 +20,7 @@
 
 ?>
 <html>
-<head>
-<meta charset="UTF-8">
-<title> Getting questions </title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
+	<?php include("header.html")?>
 <body> 
 <?php
 	echo "Zalogowany jako <a href='account.php'> ".$_SESSION["user"]."</a> | <a href='logout.php'>Wyloguj</a><br /><br />";
@@ -34,13 +30,35 @@
 	$conn->close();
 ?>
 	<br />
+	
 	<form name="choseAnswer" action="getquestion.php" method="post" onsubmit="return if_correct_answer()">
-		<input type="radio" id = "a" name="answer" value="a" /><?php echo $question1->getAnsA();?><br />
-		<input type="radio" id = "b" name="answer" value="b" /><?php echo $question1->getAnsB();?><br />
-		<input type="radio" id = "c" name="answer" value="c" /><?php echo $question1->getAnsC();?><br />
-		<input type="radio" id = "d" name="answer" value="d" /><?php echo $question1->getAnsD();?><br /><br />
-		<input type="submit" id="check" value="Sprawdź">
+		<div class="radio">
+			<label>
+				<input  type="radio" id = "a" name="answer" value="a" /><?php echo $question1->getAnsA();?><br />
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<input type="radio" id = "b" name="answer" value="b" /><?php echo $question1->getAnsB();?><br />
+			</label>
+		</div>
+		<div class="radio">
+			<label>
+				<input type="radio" id = "c" name="answer" value="c" /><?php echo $question1->getAnsC();?><br />
+			</label>
+		</div>
+		<div class="radio">
+			<label>		
+				<input type="radio" id = "d" name="answer" value="d" /><?php echo $question1->getAnsD();?><br /><br />
+			</label>
+		</div>
+		<div class="radio">
+			<label>		
+				<input type="submit" id="check" value="Sprawdź">
+				</label>
+		</div>
 	</form>
+	
 	<br />
 
 	<form method="get" action="getquestion.php">

@@ -15,24 +15,31 @@
 	}
 ?>
 
-	<head>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head/>
+	<?php include("header.html")?>
 	<body>
-		Zaloguj się, aby móc rozwiązywać testy<br /><br />
-		<form action="login.php" method="post">
-			Login:<br /><input type="text" name="login" /> <br />
-			Hasło:<br /><input type="password" name="pass" /><br /><br />
-			<input class="button" type="submit" name="log" value="Zaloguj" />
-		</form>
-		<br />
+	<div class="container">
+	
+		<h1>Zaloguj się, aby móc rozwiązywać testy</h1>
+		<div style="width: 50%;">
+		<form action="login.php" method="POST">
+			<div class="form-group">
+				<label>Login</label><input type="text" name="login" class="form-control"/>
+				</div>
+				<div class="form-group">
+				<label>Hasło</label><input type="password" name="pass"  class="form-control"/>
+				</div>
+				<div class="form-group">
+				<input class="btn btn-primary" type="submit" name="log" value="Zaloguj" />
+				</div>
+			</form>
+		</div>
+	
 	<?php
 		if(isset($_SESSION['wrongLogInfo'])){
 			echo $_SESSION['wrongLogInfo'];
 		}
 	?>
-	<br />
 	<p>Nie masz konta? <a href='registration.php'> Zarejestruj się teraz </a></p>
+	</div>
 	</body>
 </html>
