@@ -10,20 +10,29 @@
 ?>
 <!DOCTYPE HTML>
 <html lang="pl">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head/>
-	<body>
-		Rejestracja <br /><br />
-		<form action="register.php" method="post">
-			Login:<br /><input type="text" name="login" /> <br /><br />
-			Hasło:<br /><input type="password" name="password" /><br />
-			Potwierdź hasło:<br /><input type="password" name="confirm_password" /><br /><br />
-			E-mail:<br /><input type="text" name="email" /> <br />
-			Potwierdź e-mail: <br /><input type="text" name="confirm_email" /> <br /><br />
-			<input class="button" type="submit" name="log" value="Zarejestruj" />
-		</form>
+<?php include("header.html")?>
+<body>
+    <div class="container">
+		<h1>Rejestracja </h1>
+        <div style="width: 50%;">
+            <form action="register.php" method="post" data-toggle="validator">
+                <div class="form-group">
+                    <label>Login:</label><input type="text" name="login" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Hasło:</label><input type="password" name="password" class="form-control"/>
+                    <label>Potwierdź hasło:</label><input type="password" name="confirm_password" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label">E-mail:</label>
+                    <input type="email" class="form-control" name="email" id="inputEmail" data-error="Nieprawidłowy adres email" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" name="log" value="Zarejestruj" />
+                </div>
+            </form>
+        </div>
 	<?php
 		if(isset($_SESSION['wrongRegInfo'])){
 			echo $_SESSION['wrongRegInfo'];
@@ -31,5 +40,6 @@
 	?>
 		<br /><br />
 		<p>Masz już konto? <a href='index.php'> Zaloguj się </a></p>
-	</body>
+    </div>
+</body>
 </html>

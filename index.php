@@ -1,7 +1,7 @@
-﻿<!DOCTYPE HTML>
+<?php session_start();?>
+<!DOCTYPE HTML>
 <html lang="pl">
 <?php
-	session_start();
 		if(isset($_SESSION['wrongRegInfo'])){
 			unset($_SESSION['wrongRegInfo']);
 	}
@@ -18,18 +18,17 @@
 	<?php include("header.html")?>
 	<body>
 	<div class="container">
-	
-		<h1>Zaloguj się, aby móc rozwiązywać testy</h1>
+		<h1>Zaloguj się, aby móc rozwiązywać testy do egzaminu ISTQB</h1>
 		<div style="width: 50%;">
-		<form action="login.php" method="POST">
-			<div class="form-group">
-				<label>Login</label><input type="text" name="login" class="form-control"/>
+            <form action="login.php" method="POST">
+                <div class="form-group">
+                    <label>Login</label><input type="text" name="login" class="form-control"/>
+                </div>
+				<div class="form-group">
+				    <label>Hasło</label><input type="password" name="pass"  class="form-control"/>
 				</div>
 				<div class="form-group">
-				<label>Hasło</label><input type="password" name="pass"  class="form-control"/>
-				</div>
-				<div class="form-group">
-				<input class="btn btn-primary" type="submit" name="log" value="Zaloguj" />
+				    <input class="btn btn-primary" type="submit" name="log" value="Zaloguj" />
 				</div>
 			</form>
 		</div>
